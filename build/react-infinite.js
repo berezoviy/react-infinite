@@ -187,7 +187,7 @@ var Infinite = React.createClass({
       };
       utilities.nodeScrollListener = function () {};
       utilities.getScrollTop = function () {
-        return window.pageYOffset;
+        return window.pageYOffset - document.getElementById('smoothScrollingWrapper').getBoundingClientRect().top;
       };
       utilities.setScrollTop = function (top) {
         window.scroll(window.pageXOffset, top);
@@ -448,7 +448,7 @@ var Infinite = React.createClass({
         onScroll: this.utils.nodeScrollListener },
       React.createElement(
         'div',
-        { ref: 'smoothScrollingWrapper', style: infiniteScrollStyles },
+        { ref: 'smoothScrollingWrapper', id: 'smoothScrollingWrapper', style: infiniteScrollStyles },
         React.createElement('div', { ref: 'topSpacer',
           style: this.buildHeightStyle(topSpacerHeight) }),
         this.computedProps.displayBottomUpwards && loadingSpinner,
