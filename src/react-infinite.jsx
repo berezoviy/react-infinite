@@ -194,7 +194,11 @@ var Infinite = React.createClass({
         if (document.getElementById('smoothScrollingWrapper') === null) {
           return window.pageYOffset;
         } else {
-          return window.pageYOffset - document.getElementById('smoothScrollingWrapper').getBoundingClientRect().top;
+          if (window.innerWidth <= 768) {
+            return window.pageYOffset - document.getElementById('filter-tickets').offsetHeight;
+          } else {
+            return window.pageYOffset;
+          }
         }
       }
       utilities.setScrollTop = (top) => {
@@ -389,15 +393,9 @@ var Infinite = React.createClass({
     if (this.computedProps.displayBottomUpwards) {
       return !this.shouldAttachToBottom && scrollTop < this.computedProps.infiniteLoadBeginEdgeOffset;
     } else {
-      if (this.props.useWindowAsScrollContainer) {
-        var scrollableBottomAbsY = this.refs.scrollable.getBoundingClientRect().bottom - document.body.getBoundingClientRect().top;
-        var viewportBottomAbsY = scrollTop + window.innerHeight;
-        return this.computedProps.infiniteLoadBeginEdgeOffset >= scrollableBottomAbsY - viewportBottomAbsY;
-      } else {
-        return scrollTop > this.state.infiniteComputer.getTotalScrollableHeight() -
-            this.computedProps.containerHeight -
-            this.computedProps.infiniteLoadBeginEdgeOffset;
-      }
+      return scrollTop > this.state.infiniteComputer.getTotalScrollableHeight() -
+           this.computedProps.containerHeight -
+           this.computedProps.infiniteLoadBeginEdgeOffset;
     }
   },
 
