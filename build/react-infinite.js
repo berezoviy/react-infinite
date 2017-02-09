@@ -190,7 +190,7 @@ var Infinite = React.createClass({
         if (document.getElementById('smoothScrollingWrapper') === null) {
           return window.pageYOffset;
         } else {
-          if (window.innerWidth <= 768) {
+          if (window.innerWidth <= 992) {
             return window.pageYOffset - document.getElementById('filter-tickets').offsetHeight;
           } else {
             return window.pageYOffset;
