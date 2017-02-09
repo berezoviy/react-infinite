@@ -191,7 +191,7 @@ var Infinite = React.createClass({
       };
       utilities.nodeScrollListener = () => {};
       utilities.getScrollTop = () => {
-        return window.pageYOffset - document.getElementById('smoothScrollingWrapper').getBoundingClientRect().top;
+        return window.pageYOffset;
       }
       utilities.setScrollTop = (top) => {
         window.scroll(window.pageXOffset, top);
