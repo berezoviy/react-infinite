@@ -194,15 +194,20 @@ var Infinite = React.createClass({
       };
       utilities.nodeScrollListener = () => {};
       utilities.getScrollTop = () => {
-        if (document.getElementById('smoothScrollingWrapper') === null) {
-          return window.pageYOffset;
-        } else {
-          if (window.innerWidth <= 992) {
-            return window.pageYOffset - document.getElementById('filter-tickets').offsetHeight;
-          } else {
+        if (typeof window === 'undefined') {
+          if (document.getElementById('smoothScrollingWrapper') === null) {
             return window.pageYOffset;
+          } else {
+            if (window.innerWidth <= 992) {
+              return window.pageYOffset - document.getElementById('filter-tickets').offsetHeight;
+            } else {
+              return window.pageYOffset;
+            }
           }
+        } else {
+          return 0;
         }
+
       }
       utilities.setScrollTop = (top) => {
         window.scroll(window.pageXOffset, top);
@@ -397,7 +402,12 @@ var Infinite = React.createClass({
       return !this.shouldAttachToBottom && scrollTop < this.computedProps.infiniteLoadBeginEdgeOffset;
     } else {
       if (this.props.useWindowAsScrollContainer) {
-        var scrollableBottomAbsY = this.refs.scrollable.getBoundingClientRect().bottom - document.body.getBoundingClientRect().top;
+        var scrollableBottomAbsY;
+        if (typeof window === 'undefined') {
+          scrollableBottomAbsY = this.refs.scrollable.getBoundingClientRect().bottom - document.body.getBoundingClientRect().top;
+        } else {
+          scrollableBottomAbsY = 0;
+        }
         var viewportBottomAbsY = scrollTop + window.innerHeight;
         return this.computedProps.infiniteLoadBeginEdgeOffset >= scrollableBottomAbsY - viewportBottomAbsY;
       } else {
