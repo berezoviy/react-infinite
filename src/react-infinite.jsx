@@ -1,8 +1,7 @@
 /* @flow */
 if (typeof window === 'undefined') {
-  global.window = {
-    document: {}
-  };
+  global.window = {};
+  global.document = {};
 }
 var React = global.React || require('react');
 var ReactDOM = global.ReactDOM || require('react-dom');

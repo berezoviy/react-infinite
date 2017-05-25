@@ -5,9 +5,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 if (typeof window === 'undefined') {
-  global.window = {
-    document: {}
-  };
+  global.window = {};
+  global.document = {};
 }
 var React = global.React || require('react');
 var ReactDOM = global.ReactDOM || require('react-dom');
